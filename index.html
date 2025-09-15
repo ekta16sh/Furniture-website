@@ -2,41 +2,99 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WYHG8RTB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WYHG8RTB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-58WYHG8RTB');
+  </script>
 
-  gtag('config', 'G-58WYHG8RTB');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home | Modern Furniture Co.</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Modern Furniture Co. — Home</title>
+
+  <!-- Google font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="logo">Modern Furniture Co.</div>
-      <ul class="nav-links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="products.html">Products</a></li>
-      </ul>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Logo' })">
+          <span class="logo-mark">M</span>
+          <span class="brand-text">Modern Furniture Co.</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Home' })">Home</a>
+        <a href="products.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Products' })">Products</a>
+        <a href="about.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'About' })">About</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Design Your Space with Modern Elegance</h1>
-      <p>Minimalist, sustainable, and timeless furniture crafted for your home.</p>
-      <a href="products.html" class="btn">Explore Products</a>
-    </div>
-  </section>
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>Design your space with modern elegance</h1>
+          <p class="lead">Minimalist, sustainable, and timeless furniture crafted for every room.</p>
+          <div class="hero-actions">
+            <a href="products.html" class="btn primary" onclick="gtag('event','click',{ 'event_category':'Button','event_label':'Explore Products' })">Explore Products</a>
+            <a href="about.html" class="btn ghost" onclick="gtag('event','click',{ 'event_category':'Button','event_label':'Learn More' })">Learn More</a>
+          </div>
+        </div>
 
-  
-  <footer>
-    <p>© 2025 Modern Furniture Co. | Inspired by IKEA</p>
+        <div class="hero-image" aria-hidden="true">
+          <!-- Replace with an image or illustration -->
+          <img src="hero-furniture.jpg" alt="Minimal modern living room" />
+        </div>
+      </div>
+    </section>
+
+    <section class="featured container">
+      <h2>Featured pieces</h2>
+      <p class="section-sub">Handpicked items — quality materials, contemporary design.</p>
+
+      <div class="cards-grid">
+        <article class="card">
+          <img src="chair.png" alt="Wooden chair">
+          <h3>Wooden Chair</h3>
+          <p>Comfortable wooden chair with soft cushioned seating. Perfect for living rooms or study corners.</p>
+        </article>
+
+        <article class="card">
+          <img src="desk.png" alt="Office desk">
+          <h3>Office Desk</h3>
+          <p>Spacious desk designed for productivity and style — premium wood, durable finish.</p>
+        </article>
+
+        <article class="card">
+          <img src="bookshelf.png" alt="Bookshelf">
+          <h3>Bookshelf</h3>
+          <p>Elegant bookshelf with multiple storage levels to organize books and decor.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p>© 2025 Modern Furniture Co. • Crafted with care</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+    </div>
   </footer>
+
 </body>
 </html>
+
