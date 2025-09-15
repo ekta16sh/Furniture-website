@@ -2,55 +2,96 @@
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-58WYHG8RTB"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-58WYHG8RTB"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-58WYHG8RTB');
+  </script>
 
-  gtag('config', 'G-58WYHG8RTB');
-</script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Products - CozyHome Furniture</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Products | Modern Furniture Co.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>CozyHome Furniture</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="products.html">Products</a>
-    </nav>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand">
+        <a href="index.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Logo' })">
+          <span class="logo-mark">M</span>
+          <span class="brand-text">Modern Furniture Co.</span>
+        </a>
+      </div>
+
+      <nav class="main-nav" aria-label="Primary navigation">
+        <a href="index.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Home' })">Home</a>
+        <a href="products.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'Products' })">Products</a>
+        <a href="about.html" onclick="gtag('event','click',{ 'event_category':'Navigation','event_label':'About' })">About</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <h2>Our Products</h2>
-    <p>Explore our handcrafted, high-quality furniture pieces.</p>
-
-    <div class="product-list">
-      <div class="product">
-        <img src="chair.png" alt="Comfortable Wooden Chair">
-        <h3>Wooden Chair</h3>
-        <p>Comfortable wooden chair with soft cushioned seating. Perfect for living rooms or study corners.</p>
+    <section class="products-hero">
+      <div class="container">
+        <h1>Our Products</h1>
+        <p class="section-sub">Explore our handcrafted, high-quality furniture pieces.</p>
       </div>
+    </section>
 
-      <div class="product">
-        <img src="desk.png" alt="Modern Office Desk">
-        <h3>Office Desk</h3>
-        <p>Spacious office desk made from premium wood, designed for productivity and style.</p>
-      </div>
+    <section class="product-grid container">
+      <article class="product-card">
+        <div class="product-image">
+          <img src="chair.png" alt="Comfortable Wooden Chair">
+        </div>
+        <div class="product-body">
+          <h3>Wooden Chair</h3>
+          <p>Comfortable wooden chair with soft cushioned seating. Perfect for living rooms or study corners.</p>
+          <a class="btn small" href="#">View</a>
+        </div>
+      </article>
 
-      <div class="product">
-        <img src="bookshelf.png" alt="Elegant Bookshelf">
-        <h3>Bookshelf</h3>
-        <p>Elegant bookshelf with multiple storage levels to organize your books and decor.</p>
-      </div>
-    </div>
+      <article class="product-card">
+        <div class="product-image">
+          <img src="desk.png" alt="Modern Office Desk">
+        </div>
+        <div class="product-body">
+          <h3>Office Desk</h3>
+          <p>Spacious office desk made from premium wood, designed for productivity and style.</p>
+          <a class="btn small" href="#">View</a>
+        </div>
+      </article>
+
+      <article class="product-card">
+        <div class="product-image">
+          <img src="bookshelf.png" alt="Elegant Bookshelf">
+        </div>
+        <div class="product-body">
+          <h3>Bookshelf</h3>
+          <p>Elegant bookshelf with multiple storage levels to organize your books and decor.</p>
+          <a class="btn small" href="#">View</a>
+        </div>
+      </article>
+
+      <!-- add more product-card blocks as needed -->
+    </section>
   </main>
 
-  <footer>
-    <p>&copy; 2025 CozyHome Furniture. All rights reserved.</p>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <p>© 2025 Modern Furniture Co.</p>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="products.html">Products</a>
+          <a href="about.html">About</a>
+        </div>
+      </div>
+    </div>
   </footer>
 </body>
 </html>
+
