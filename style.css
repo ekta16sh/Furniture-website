@@ -113,13 +113,32 @@ body{
 }
 
 /* hero image */
-.hero-image{flex:0 0 420px;max-width:420px}
-.hero-image img{
-  width:100%;
-  border-radius:14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-  display:block;
+/* hero image */
+.hero-image {
+  flex: 0 0 420px;
+  max-width: 420px;
+  min-width: 260px;    /* keeps it visible on smaller screens */
 }
+
+.hero-image img {
+  width: 100%;
+  height: 320px;       /* visible height for most screens */
+  object-fit: cover;   /* crop to fill without stretching */
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  display: block;
+}
+
+/* larger hero image on wide screens */
+@media (min-width:1100px) {
+  .hero-image img { height: 420px; }
+}
+
+/* hide on very small screens if you prefer */
+@media (max-width:640px) {
+  .hero-image { display:none; } /* optional: hides it on tiny phones */
+}
+
 
 /* featured / cards */
 .featured{padding:36px 0 64px}
