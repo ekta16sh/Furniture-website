@@ -12,9 +12,22 @@
 
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Products | Modern Furniture Co.</title>
+  <title>Modern Furniture Co. — Products</title>
+
+  <!-- Google font -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* small additions for rent UI */
+    .price { font-weight:700; color:var(--accent); margin-top:8px; }
+    .rent-controls { display:flex; gap:8px; align-items:center; margin-top:12px; }
+    .rent-controls input[type="number"]{ width:72px; padding:8px; border-radius:8px; background:transparent; border:1px solid rgba(255,255,255,0.08); color: #fff; }
+    .rent-total { margin-left:auto; font-weight:700; color:#dfe; }
+    .rent-btn { padding:8px 10px; border-radius:10px; font-weight:700; cursor:pointer; border:none; }
+    .rent-mode-banner{ background: linear-gradient(90deg, rgba(242,182,0,0.12), rgba(255,255,255,0.02)); padding:10px; border-radius:10px; margin:18px 0; text-align:center; color:var(--muted); }
+    .hidden{ display:none !important; }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -35,55 +48,79 @@
   </header>
 
   <main>
-    <section class="products-hero">
-      <div class="container">
-        <h1>Our Products</h1>
-        <p class="section-sub">Explore our handcrafted, high-quality furniture pieces.</p>
+    <section class="products-hero container">
+      <h1>Our Products</h1>
+      <p class="section-sub">Choose a product to rent — pick how many days and we’ll show you the total.</p>
+
+      <!-- banner shown only in rent mode -->
+      <div id="rentBanner" class="rent-mode-banner hidden">
+        You opened Rent mode — choose a product and number of days to see rental totals.
       </div>
     </section>
 
-    <section class="product-grid container">
-      <article class="product-card">
-        <div class="product-image">
-          <img src="chair.png" alt="Comfortable Wooden Chair">
-        </div>
+    <section class="product-grid container" id="productGrid">
+      <!-- Product cards: include data-price attribute (price per day) -->
+      <article class="product-card" data-id="chair-001" data-price="199">
+        <div class="product-image"><img src="chair.png" alt="Wooden chair"></div>
         <div class="product-body">
           <h3>Wooden Chair</h3>
-          <p>Comfortable wooden chair with soft cushioned seating. Perfect for living rooms or study corners.</p>
-          <a class="btn small" href="#">View</a>
+          <p>Comfortable wooden chair with soft cushioned seating.</p>
+          <div class="price">₹199 / day</div>
+
+          <!-- rent area will be toggled by JS -->
+          <div class="rent-area hidden">
+            <div class="rent-controls">
+              <label for="days-chair-001">Days</label>
+              <input id="days-chair-001" type="number" min="1" value="1" />
+              <div class="rent-total" aria-live="polite">Total: ₹199</div>
+              <button class="btn primary rent-btn" data-product="chair-001">Rent</button>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="product-card">
-        <div class="product-image">
-          <img src="desk.png" alt="Modern Office Desk">
-        </div>
+      <article class="product-card" data-id="desk-001" data-price="399">
+        <div class="product-image"><img src="desk.png" alt="Office desk"></div>
         <div class="product-body">
           <h3>Office Desk</h3>
-          <p>Spacious office desk made from premium wood, designed for productivity and style.</p>
-          <a class="btn small" href="#">View</a>
+          <p>Spacious desk designed for productivity and style.</p>
+          <div class="price">₹399 / day</div>
+
+          <div class="rent-area hidden">
+            <div class="rent-controls">
+              <label for="days-desk-001">Days</label>
+              <input id="days-desk-001" type="number" min="1" value="1" />
+              <div class="rent-total" aria-live="polite">Total: ₹399</div>
+              <button class="btn primary rent-btn" data-product="desk-001">Rent</button>
+            </div>
+          </div>
         </div>
       </article>
 
-      <article class="product-card">
-        <div class="product-image">
-          <img src="bookshelf.png" alt="Elegant Bookshelf">
-        </div>
+      <article class="product-card" data-id="bookshelf-001" data-price="299">
+        <div class="product-image"><img src="bookshelf.png" alt="Bookshelf"></div>
         <div class="product-body">
           <h3>Bookshelf</h3>
-          <p>Elegant bookshelf with multiple storage levels to organize your books and decor.</p>
-          <a class="btn small" href="#">View</a>
+          <p>Elegant bookshelf with multiple storage levels.</p>
+          <div class="price">₹299 / day</div>
+
+          <div class="rent-area hidden">
+            <div class="rent-controls">
+              <label for="days-bookshelf-001">Days</label>
+              <input id="days-bookshelf-001" type="number" min="1" value="1" />
+              <div class="rent-total" aria-live="polite">Total: ₹299</div>
+              <button class="btn primary rent-btn" data-product="bookshelf-001">Rent</button>
+            </div>
+          </div>
         </div>
       </article>
-
-      <!-- add more product-card blocks as needed -->
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="container">
       <div class="footer-inner">
-        <p>© 2025 Modern Furniture Co.</p>
+        <p>© 2025 Modern Furniture Co. • Crafted with care</p>
         <div class="footer-links">
           <a href="index.html">Home</a>
           <a href="products.html">Products</a>
@@ -92,6 +129,105 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    // Utility: parse URL param 'rent'
+    function isRentMode() {
+      return new URLSearchParams(window.location.search).get('rent') === 'true';
+    }
+
+    // Setup rent UI if rent=true
+    document.addEventListener('DOMContentLoaded', function () {
+      const rentMode = isRentMode();
+      const rentBanner = document.getElementById('rentBanner');
+      const productGrid = document.getElementById('productGrid');
+
+      // GA: log product page view; include rent_mode flag
+      gtag('event', 'view_products', {
+        'event_category': 'Products',
+        'event_label': rentMode ? 'Products (Rent Mode)' : 'Products (View Mode)',
+        'rent_mode': rentMode ? 'true' : 'false'
+      });
+
+      if (rentMode) {
+        rentBanner.classList.remove('hidden');
+      }
+
+      // For each product card, wire up rent controls
+      const productCards = productGrid.querySelectorAll('.product-card');
+      productCards.forEach(card => {
+        const pricePerDay = Number(card.getAttribute('data-price') || 0);
+        const productId = card.getAttribute('data-id');
+
+        const rentArea = card.querySelector('.rent-area');
+        const daysInput = rentArea.querySelector('input[type="number"]');
+        const totalEl = rentArea.querySelector('.rent-total');
+        const rentBtn = rentArea.querySelector('.rent-btn');
+
+        // show/hide rent area depending on rentMode
+        if (rentMode) {
+          rentArea.classList.remove('hidden');
+        } else {
+          rentArea.classList.add('hidden');
+        }
+
+        // update total function
+        function updateTotal() {
+          let days = Number(daysInput.value) || 1;
+          if (days < 1) { days = 1; daysInput.value = 1; }
+          const total = days * pricePerDay;
+          totalEl.textContent = 'Total: ₹' + total;
+          // GA: log change in days selection
+          gtag('event', 'change_rental_days', {
+            'event_category': 'Rent UI',
+            'event_label': productId,
+            'days': days,
+            'price_per_day': pricePerDay
+          });
+        }
+
+        // initial total update
+        updateTotal();
+
+        // event listeners
+        daysInput.addEventListener('change', updateTotal);
+        daysInput.addEventListener('input', updateTotal);
+
+        rentBtn.addEventListener('click', function (e) {
+          const days = Number(daysInput.value) || 1;
+          const total = days * pricePerDay;
+
+          // GA: rent button clicked
+          gtag('event', 'rent_clicked', {
+            'event_category': 'Rent Action',
+            'event_label': productId,
+            'days': days,
+            'total_amount': total
+          });
+
+          // For demo: simple modal-style confirm (native confirm). Replace with your checkout flow.
+          const confirmed = confirm('Rent ' + productId + ' for ' + days + ' day(s) — Total: ₹' + total + '. Proceed?');
+          if (confirmed) {
+            // GA: completed booking (demo)
+            gtag('event', 'rent_confirmed', {
+              'event_category': 'Rent Action',
+              'event_label': productId,
+              'days': days,
+              'total_amount': total
+            });
+
+            alert('Thanks — your rent request for ' + productId + ' has been received (demo).');
+            // In a real app: push to backend or open checkout, etc.
+          }
+        });
+
+        // Accessibility: allow Enter on days input to trigger update
+        daysInput.addEventListener('keydown', function(ev){
+          if(ev.key === 'Enter') { ev.preventDefault(); updateTotal(); }
+        });
+      });
+
+    });
+  </script>
 </body>
 </html>
-
